@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     int change;
     ArrayList<Question> questions;
 
-    // TODO 3-A: Declare View member variables
     ImageView questionImageView;
     TextView questionTextView, questionsRemainingTextView;
     Button answer0Button, answer1Button, answer2Button, answer3Button, submitButton;
@@ -30,15 +29,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO 2-G: Show app icon in ActionBar
-
         setContentView(R.layout.activity_main);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.ic_unquote_icon);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setElevation(0);
 
-        // TODO 3-B: assign View member variables
         questionImageView = findViewById(R.id.iv_main_question_image);
         questionTextView = findViewById(R.id.tv_main_question_title);
         questionsRemainingTextView = findViewById(R.id.tv_main_questions_remaining_count);
@@ -48,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         answer3Button = findViewById(R.id.btn_main_answer_3);
         submitButton = findViewById(R.id.btn_main_submit_answer);
 
-        // TODO 4-E: set onClickListener for each answer Button
         answer0Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 onAnswerSelected(3);
             }
         });
-        // TODO 5-A: set onClickListener for the submit answer Button
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         startNewGame();
     }
 
-    // TODO 3-F: displayQuestion(Question question) {...}
     void displayQuestion(Question question) {
         questionImageView.setImageResource(question.imageId);
         questionTextView.setText(question.questionText);
@@ -93,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
         answer3Button.setText(question.answer3);
         submitButton.setText("SUBMIT");
     }
-    // TODO 3-C: displayQuestionsRemaining(int questionRemaining) {...}
+
     void displayQuestionsRemaining(int questionRemaining) {
         questionsRemainingTextView.setText(String.valueOf(questionRemaining));
     }
-    // TODO 4-A: onAnswerSelected(int answerSelected) {...}
+
     void onAnswerSelected(int answerSelected) {
         Question currentQuestion = getCurrentQuestion();
         currentQuestion.playerAnswer = answerSelected;
@@ -130,13 +124,11 @@ public class MainActivity extends AppCompatActivity {
             }
             questions.remove(currentQuestion);
 
-            // TODO 3-D.i: Uncomment the line below after implementing displayQuestionsRemaining(int)
             displayQuestionsRemaining(questions.size());
 
             if (questions.size() == 0) {
                 String gameOverMessage = getGameOverMessage(totalCorrect, totalQuestions);
 
-                // TODO 5-D: Show a popup instead
                 AlertDialog.Builder gameOverDialogBuilder = new AlertDialog.Builder(MainActivity.this);
                 gameOverDialogBuilder.setCancelable(false);
                 gameOverDialogBuilder.setTitle("Try Again, Loser!");
@@ -151,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 chooseNewQuestion();
 
-                // TODO 3-H.i: uncomment after implementing displayQuestion(Question)
                 displayQuestion(getCurrentQuestion());
             }
         }
@@ -160,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
     void startNewGame() {
         questions = new ArrayList<>();
 
-        // TODO 2-H: Provide actual drawables for each of these questions!
         Question question0 = new Question(R.drawable.img_quote_0, "Pretty good advice,\n" +
                 "and perhaps a scientist\n" +
                 "did say it… Who\n" +
@@ -197,10 +187,8 @@ public class MainActivity extends AppCompatActivity {
 
         Question firstQuestion = chooseNewQuestion();
 
-        // TODO 3-D.ii: Uncomment the line below after implementing displayQuestionsRemaining(int)
         displayQuestionsRemaining(questions.size());
 
-        // TODO 3-H.ii: Uncomment after implementing displayQuestion(Question)
         displayQuestion(firstQuestion);
     }
 
